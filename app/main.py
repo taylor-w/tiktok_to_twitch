@@ -3,6 +3,8 @@ import sys
 import threading
 from tiktok import *
 
+# TODO: Add 'debug' mode in config where 'debug' substitutes bot's channel and a random tiktok live, for testing
+
 def main():
     sys.tracebacklimit = 0
     try:
