@@ -10,9 +10,9 @@ def twitch_rfc(messages):
         sock = socket.socket()
         server = "irc.chat.twitch.tv"
         port = 6667
-        nickname = "tiktok_chatter"
-        token = ""
-        channel = "tiktok_chatter"
+        nickname = "tiktok_chatter" # twitch.tv bot viewer
+        token = "" # oauth token for twitch.tv bot
+        channel = "tiktok_chatter" # twitch channel where received TikTok messages are sent
 
         sock.connect((server, port))
         sock.send(f"PASS {token}\n".encode('utf-8'))

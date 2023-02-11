@@ -7,7 +7,7 @@ from twitch import *
 def tiktok_chat(res_list):
     try:
         print("tiktok_chat start")
-        client: TikTokLiveClient = TikTokLiveClient(unique_id="@imcoty", **({
+        client: TikTokLiveClient = TikTokLiveClient(unique_id="@<some_tiktok_channel>", **({
             "loop": "loop"
         }))
 
