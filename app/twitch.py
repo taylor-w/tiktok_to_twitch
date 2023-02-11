@@ -6,7 +6,8 @@ import json
     # TODO: token rotation for IRC oauth
 
 def twitch_rfc(messages):
-    if messages:
+    print(len(messages) > 0)
+    if len(messages) > 0:
         sock = socket.socket()
         server = "irc.chat.twitch.tv"
         port = 6667
