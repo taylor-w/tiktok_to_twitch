@@ -1,15 +1,26 @@
 from TikTokLive import TikTokLiveClient
-from TikTokLive.types.events import CommentEvent, ConnectEvent
+from TikTokLive.types.events import CommentEvent, ConnectEvent, DisconnectEvent, LiveEndEvent, WeeklyRankingEvent
 from twitch import *
+import sys
 
     # TODO: parameterize config (def build_config ?)
 
 def tiktok_chat(res_list):
     try:
         print("tiktok_chat start")
-        client: TikTokLiveClient = TikTokLiveClient(unique_id="@imcoty", **({
+        client: TikTokLiveClient = TikTokLiveClient(unique_id="@<some_tiktok_channel>", **({
             "loop": "loop"
         }))
+
+        @client.on("live_end")
+        async def on_connect(event: LiveEndEvent):
+            print(f"Livestream ended :(")
+            sys.exit()
+
+        @client.on("disconnect")
+        async def on_disconnect(event: DisconnectEvent):
+            print("Disconnected")
+            await client.reconnect()
 
         # Notice no decorator?
         @client.on("comment")
