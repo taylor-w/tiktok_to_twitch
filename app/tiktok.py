@@ -1,6 +1,7 @@
 from TikTokLive import TikTokLiveClient
 from TikTokLive.types.events import CommentEvent, ConnectEvent, DisconnectEvent, LiveEndEvent, WeeklyRankingEvent
 from twitch import *
+from time import sleep
 import sys
 
     # TODO: parameterize config (def build_config ?)
@@ -20,6 +21,7 @@ def tiktok_chat(res_list):
         @client.on("disconnect")
         async def on_disconnect(event: DisconnectEvent):
             print("Disconnected")
+            sleep(30) # sleep 30 seconds if disconnected
             await client.reconnect()
 
         # Notice no decorator?
