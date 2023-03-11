@@ -2,18 +2,17 @@ import requests
 import socket
 import json
 
-    # TODO: parameterize config (def build_config ?)
     # TODO: token rotation for IRC oauth
 
-def twitch_rfc(messages):
+def twitch_rfc(config, messages):
     try:
         if len(messages) > 0:
             sock = socket.socket()
             server = "irc.chat.twitch.tv"
             port = 6667
-            nickname = "tiktok_chatter" # twitch.tv bot viewer
-            token = "" # oauth token for twitch.tv bot
-            channel = "tiktok_chatter" # twitch channel where received TikTok messages are sent
+            nickname = f'{config["twitch_bot_user"]}' # twitch.tv bot viewer
+            token = f'{config["twitch_bot_oauth"]}' # oauth token for twitch.tv bot
+            channel = f'{config["twitch_channel"]}' # twitch channel where received TikTok messages are sent
 
             sock.connect((server, port))
             sock.send(f"PASS {token}\n".encode('utf-8' ))

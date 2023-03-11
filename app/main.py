@@ -2,11 +2,14 @@ import asyncio
 import sys
 import threading
 from tiktok import *
+from build_config import *
 from time import sleep
 
 # TODO: Add 'debug' mode in config where 'debug' substitutes bot's channel and a random tiktok live, for testing
 
 def main():
+    config = build_config()
+
     sys.tracebacklimit = 0
     res_list = []
     sleep_counter = 0
@@ -16,7 +19,7 @@ def main():
         while True:
             try:
                 # 1 thread to async run tiktok_chat on res_list
-                t1 = threading.Thread(target=asyncio.run, args=(tiktok_chat(res_list), ))
+                t1 = threading.Thread(target=asyncio.run, args=(tiktok_chat(config, res_list), ))
                 t1.start()
                 t1.join()
             except asyncio.CancelledError:
