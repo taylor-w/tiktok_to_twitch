@@ -30,13 +30,12 @@ Currently just a script, so the referenced python `import`s will need installed 
 3. `python main.py`
     - Execute the main python script
 
-**NOTE** (*REQUIRED BEFORE EXECUTION*): The current versioning would require the 'credentials' to be manually added to the script's source. This is *temporary*, until some TODOs are tackled (see below)
+**NOTE** (*REQUIRED BEFORE EXECUTION*): The current versioning requires the fields to be fully populated in `config.yaml` in order to properly execute the script
 
 ## Future-state
 Make this script serviceable so end-user can execute more directly, and easily add credentials to a top-level local config
 
 ## TODO
-- `build_config()` or similar for building and passing config values
 - proper config value storage
 - functional key rotation for RFC connection (`twitch.py` file)
 

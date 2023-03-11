@@ -6,10 +6,10 @@ import sys
 
     # TODO: parameterize config (def build_config ?)
 
-def tiktok_chat(res_list):
+def tiktok_chat(config, res_list):
     try:
         print("tiktok_chat start")
-        client: TikTokLiveClient = TikTokLiveClient(unique_id="@<some_tiktok_channel>", **({
+        client: TikTokLiveClient = TikTokLiveClient(unique_id=f'@{config["tiktok_channel"]}', **({
             "loop": "loop"
         }))
 
@@ -30,7 +30,7 @@ def tiktok_chat(res_list):
             # add tiktok msg to list
             res_list.append(f"{event.user.nickname}: {event.comment}")
             # send tiktok msg list to twitch_rfc to process
-            twitch_rfc(res_list)
+            twitch_rfc(config, res_list)
             # remove tiktok msg from list so it's sent again
             res_list.remove(f"{event.user.nickname}: {event.comment}")
 
