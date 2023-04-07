@@ -3,7 +3,6 @@ import sys
 import threading
 from tiktok import *
 from utility import *
-from build_config import *
 from time import sleep
 
 # TODO: Add 'debug' mode in config where 'debug' substitutes bot's channel and a random tiktok live, for testing
