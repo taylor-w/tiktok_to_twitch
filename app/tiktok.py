@@ -3,10 +3,7 @@ from TikTokLive.types.events import * #CommentEvent, ConnectEvent, DisconnectEve
 from twitch import *
 from utility import *
 from time import sleep
-import sys
 import asyncio
-
-    # TODO: parameterize config (def build_config ?)
 
 def tiktok_chat(config, res_list):
     debug_thread("tiktok_chat")

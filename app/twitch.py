@@ -1,6 +1,4 @@
-import requests
 import socket
-import json
 from utility import *
 
     # TODO: token rotation for IRC oauth
