@@ -36,7 +36,7 @@ Currently just a script, so the referenced python `import`s will need installed 
 Make this script serviceable so end-user can execute more directly, and easily add credentials to a top-level local config
 
 ## TODO
-- clean up unused functions/imports/code, etc
+- add `requirements.txt` file for python imports
 - proper config value storage
 - functional key rotation for RFC connection (`twitch.py` file)
 
