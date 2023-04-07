@@ -1,11 +1,10 @@
-import asyncio
 import sys
 import threading
 from tiktok import *
 from utility import *
 from time import sleep
+from datetime import datetime, timedelta
 
-# TODO: Add 'debug' mode in config where 'debug' substitutes bot's channel and a random tiktok live, for testing
 
 def main():
     debug_thread("main")
@@ -15,6 +14,7 @@ def main():
     res_list = []
     sleep_counter = 0
     backoff_seconds = 60
+    sleep_cter_time = datetime.now()
 
     while True:
         while True:
@@ -32,6 +32,7 @@ def main():
             if t1.is_alive():
                 continue
             else:
+                # incremental sleep for each detection of tiktok live stream down time
                 # 1. 60 secs, 2. 120 sec, 3. 440 secs, 4. 880 secs, 5. 1760 secs, 6. 3600 secs
                 if sleep_counter == 0:
                     backoff_seconds = 60
@@ -45,7 +46,14 @@ def main():
                     backoff_seconds = 3600
                 print(f'Tiktok user offline, sleeping thread: {backoff_seconds}...')
                 sleep(backoff_seconds)
+                
+                # If the stream's last sleep thread was greater than 2 hours ago, reset sleep counter
+                if (datetime.now() > sleep_cter_time + timedelta(hours=2)):
+                    sleep_counter = 0
+
                 sleep_counter += 1
+                sleep_cter_time = datetime.now()
+
                 break
 
 if __name__ == '__main__':
