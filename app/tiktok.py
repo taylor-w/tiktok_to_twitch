@@ -1,12 +1,15 @@
-from TikTokLive import TikTokLiveClient
-from TikTokLive.types.events import CommentEvent, ConnectEvent, DisconnectEvent, LiveEndEvent, WeeklyRankingEvent
+from TikTokLive import *# TikTokLiveClient
+from TikTokLive.types.events import * #CommentEvent, ConnectEvent, DisconnectEvent, LiveEndEvent, WeeklyRankingEvent
 from twitch import *
+from utility import *
 from time import sleep
 import sys
+import asyncio
 
     # TODO: parameterize config (def build_config ?)
 
 def tiktok_chat(config, res_list):
+    debug_thread("tiktok_chat")
     try:
         print("tiktok_chat start")
         client: TikTokLiveClient = TikTokLiveClient(unique_id=f'@{config["tiktok_channel"]}', **({
@@ -16,13 +19,13 @@ def tiktok_chat(config, res_list):
         @client.on("live_end")
         async def on_connect(event: LiveEndEvent):
             print(f"Livestream ended :(")
-            sys.exit()
+            # sys.exit()
 
         @client.on("disconnect")
         async def on_disconnect(event: DisconnectEvent):
             print("Disconnected")
-            sleep(30) # sleep 30 seconds if disconnected
-            await client.reconnect()
+            # sleep(30) # sleep 30 seconds if disconnected
+            # await client.reconnect()
 
         # Notice no decorator?
         @client.on("comment")
@@ -33,9 +36,14 @@ def tiktok_chat(config, res_list):
             twitch_rfc(config, res_list)
             # remove tiktok msg from list so it's sent again
             res_list.remove(f"{event.user.nickname}: {event.comment}")
+            ### TEST: forces client stopped behavior
+            sleep(3)
+            client.stop()
+            # client.close()
 
         # Run the client and block the main thread
         # await client.start() to run non-blocking
-        client.run()
+        # asyncio.run(client.run())
+        asyncio.run(client.start())
     except Exception as ex:
         print(ex)

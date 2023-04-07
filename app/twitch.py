@@ -1,10 +1,12 @@
 import requests
 import socket
 import json
+from utility import *
 
     # TODO: token rotation for IRC oauth
 
 def twitch_rfc(config, messages):
+    debug_thread("twitch_rfc")
     try:
         if len(messages) > 0:
             sock = socket.socket()
