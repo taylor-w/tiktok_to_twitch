@@ -19,13 +19,14 @@ def tiktok_chat(config, res_list):
         @client.on("live_end")
         async def on_connect(event: LiveEndEvent):
             print(f"Livestream ended :(")
-            # sys.exit()
+            await asyncio.sleep(3.14)
+            client.stop()
 
         @client.on("disconnect")
         async def on_disconnect(event: DisconnectEvent):
             print("Disconnected")
-            # sleep(30) # sleep 30 seconds if disconnected
-            # await client.reconnect()
+            await asyncio.sleep(3.14)
+            client.stop()
 
         # Notice no decorator?
         @client.on("comment")
@@ -36,14 +37,9 @@ def tiktok_chat(config, res_list):
             twitch_rfc(config, res_list)
             # remove tiktok msg from list so it's sent again
             res_list.remove(f"{event.user.nickname}: {event.comment}")
-            ### TEST: forces client stopped behavior
-            sleep(3)
-            client.stop()
-            # client.close()
 
         # Run the client and block the main thread
         # await client.start() to run non-blocking
-        # asyncio.run(client.run())
         asyncio.run(client.start())
     except Exception as ex:
         print(ex)

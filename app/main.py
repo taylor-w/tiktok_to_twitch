@@ -27,11 +27,6 @@ def main():
                 t1.start()
                 print("t1 join")
                 t1.join()
-                # print("is t1 alive?")
-                # if t1.is_alive():
-                #     print("IS ALIVEEEEEE")
-                # else:
-                #     print("DEAD")
             except Exception as ex:
                 print(f'Error in coroutine, ending main: {ex}')
             print("is t1 alive?")
@@ -56,7 +51,6 @@ def main():
 
 if __name__ == '__main__':
     debug_thread("__main__")
-    # asyncio set event loop policy for windows compliance
-    # asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+
     # call main
     main()
